@@ -1,0 +1,17 @@
+id|Department|Category|SubCategory|active|createDate|country
+1|Books|Arts & Photography Books|Photography & Video|1|2019-06-11|United States
+2|Books|Arts & Photography Books|Music|1|2019-06-11|United States
+3|Books|Arts & Photography Books|Graphic Design|1|2019-06-11|United States
+4|Books|Biographies & Memoirs|Memoirs|1|2019-06-11|Colombia
+5|Books|Biographies & Memoirs|Historical|1|2019-06-11|Colombia
+6|Books|Biographies & Memoirs|Professionals & Academics|1|2019-06-11|Colombia
+7|Books|Business & Money|Management & Leadership|1|2019-06-11|Brasil
+8|Books|Business & Money|Investing|1|2019-06-11|Brasil
+9|Books|Business & Money|Personal Finance|1|2019-06-11|Brasil
+10|Books|Calendars|Movies|1|2019-06-11|China
+11|Books|Calendars|Music|1|2019-06-11|China
+12|Books|Calendars|Arts|1|2019-06-11|China
+13|Books|Children's Books|Classics|1|2019-06-11|Japan
+14|Books|Children's Books|Humor|1|2019-06-11|Japan
+15|Books|Children's Books|Literature & Fiction|1|2019-06-11|Japan
+

@@ -1,0 +1,17 @@
+id|Department|Category|SubCategory|active|createDate|country
+1|Electronics|Audio Cables|Digital Coaxial Cables|0|2019-06-11|United States
+2|Electronics|Audio Cables|Fiber Optic Cables|1|2019-06-11|United States
+3|Electronics|Audio Cables|RCA Cables|1|2019-06-11|United States
+4|Electronics|Audio Cables|Speaker Cables|0|2019-06-11|United States
+5|Electronics|Audio Cables|Subwoofer Cables|1|2019-06-11|United States
+6|Electronics|Audio Cables|Stereo Jack Cables|1|2019-06-11|United States
+7|Electronics|Video Cables|Component Video|0|2019-06-11|United States
+8|Electronics|Video Cables|Composite Video|0|2019-06-11|United States
+9|Electronics|Video Cables|DVI Cables|1|2019-06-11|United States
+10|Electronics|Video Cables|F-Pin-Coaxial Tip|0|2019-06-11|United States
+11|Electronics|Video Cables|HDMI Cables|0|2019-06-11|United States
+12|Electronics|Video Cables|Firewire Cables|1|2019-06-11|United States
+13|Electronics|Video Cables|S-Video Cables|0|2019-06-11|United States
+14|Electronics|Power Cables|N/A|1|2019-06-11|United States
+15|Electronics|Audio & Video Accesories|3D Glasses|1|2019-06-11|United States
+16|Electronics|Audio & Video Accesories|Radio Antennas|0|2019-06-11|United States

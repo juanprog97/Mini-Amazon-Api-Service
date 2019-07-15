@@ -1,0 +1,16 @@
+id|Department|Category|SubCategory|active|createDate|country
+1|Movies&TV|Department|Movies|1|2019-06-18|colombia
+2|Movies&TV|Department|TV Shows|1|2019-06-19|Brasil
+3|Movies&TV|Devices|Amazon Fire TV|0|2019-06-20|United States
+4|Movies&TV|Devices|Amazon Fire TV Stick|1|2019-06-21|Japan
+5|Movies&TV|Devices|Kindle Fire|0|2019-06-22|colombia
+6|Movies&TV|Formats|Blue-ray|1|2019-06-23|United States
+7|Movies&TV|Formats|DVD|0|2019-06-24|China
+8|Movies&TV|Formats|4k Ultra HD|1|2019-06-25|country
+9|Movies&TV|Formats|Amazon Video|0|2019-06-26|colombia
+10|Movies&TV|Categories|New Releases|1|2019-06-27|Brasil
+11|Movies&TV|Categories|Pre-orders|0|2019-06-28|United States
+12|Movies&TV|Categories|Kind & Family|1|2019-06-29|Japan
+13|Movies&TV|Customer Favorite|Todays Deals|1|2019-06-30|colombia
+14|Movies&TV|Customer Favorite|Best Sellers|1|2019-07-01|United States
+15|Movies&TV|Popular|Comedy|1|2019-07-02|China

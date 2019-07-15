@@ -1,0 +1,16 @@
+id|Department|Category|SubCategory|active|createDate|country
+1|Coche y Moto|Herramientas y Equipos|Bombas para coche|1|2018-08-17|United States
+2|Coche y Moto|Herramientas y Equipos|llantas|1|2017-06-06|United States
+3|Coche y Moto|Herramientas y Equipos|Accesorios de neumaticos y llantas|1|2017-04-19|United States
+4|Coche y Moto|Herramientas y Equipos|Equipos de reparacion de vehiculo|1|2018-01-11|United States
+5|Coche y Moto|Herramientas y Equipos|Herramientas para coche|1|2015-04-29|United States
+6|Coche y Moto|Herramientas y Equipos|Pinturas y accesorios de pintura|1|2011-06-20|United States
+7|Coche y Moto|Herramientas y Equipos|Cuidado de coche y moto|1|2018-06-21|United States
+8|Coche y Moto|Accesorios para coche|Accesorios para descapotable|1|2018-07-25|United States
+9|Coche y Moto|Accesorios para coche|Bombas|1|2017-11-23|United States
+10|Coche y Moto|Accesorios para coche|Banderas|1|2019-01-01|United States
+11|Coche y Moto|Accesorios para coche|Botiquines|1|2014-02-07|United States
+12|Coche y Moto|Accesorios para coche|Extintores|1|2017-10-29|United States
+13|Coche y Moto|Productos para aficionados de coche|Encendedores|1|2016-09-11|United States
+14|Coche y Moto|Productos para aficionados de coche|Letreros|1|2015-12-24|United States
+15|Coche y Moto|Productos para aficionados de coche|Ropa|1|2018-03-23|United States

@@ -1,0 +1,16 @@
+id|Department|Category|SubCategory|active|createDate|country
+1|SportAndOutdoors|Outdoor Recreation|Outdoor Clothing|1|2019-06-11|United States
+2|SportAndOutdoors|Outdoor Recreation |Camping & Hiking|1|2019-06-11|United States
+3|SportAndOutdoors|Outdoor Recreation |Cycling|1|2019-06-11|United States
+4|SportAndOutdoors|Outdoor Recreation |Accesories|1|2019-06-11|Colombia
+5|SportAndOutdoors|Sports|Golf|1|2019-06-11|Colombia
+6|SportAndOutdoors|Sports|Runnig|1|2019-06-11|Colombia
+7|SportAndOutdoors|Sports|Swimming|1|2019-06-11|Brasil
+8|SportAndOutdoors|Sports|Team Sport|1|2019-06-11|Brasil
+9|SportAndOutdoors|Fitness|Exercise & Fitness Finance|1|2019-06-11|Brasil
+10|SportAndOutdoors|Fitness|Yoga|1|2019-06-11|China
+11|SportAndOutdoors|Fitness|Sport Medicine|1|2019-06-11|China
+12|SportAndOutdoors|Fitness|Accesories|1|2019-06-11|China
+13|SportAndOutdoors|Fan Shop|MBL|1|2019-06-11|Japan
+14|SportAndOutdoors|Fan Shop|NFL|1|2019-06-11|Japan
+15|SportAndOutdoors|Fan Shop|NBA|1|2019-06-11|Japan

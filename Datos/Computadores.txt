@@ -1,0 +1,21 @@
+id|Department|Category|SubCategory|active|createDate|country
+1|Computadores|Componentes de Computadoras|Componentes de Laptop|1|2019-06-10|United States
+2|Computadores|Componentes de Computadoras|Computadoras Básicas|1|2019-06-10|United States
+3|Computadores|Componentes de Computadoras|Componentes Internos|1|2019-06-10|United States
+4|Computadores|Componentes de Computadoras|Componentes Externos|1|2019-06-10|United States
+5|Computadores|Componentes de Computadoras|Computadoras de Placa Reducida|1|2019-06-10|United States
+6|Computadores|Dispositivos para redes|Adaptadores de Red|1|2019-06-10|United States
+7|Computadores|Dispositivos para redes|Almacenamiento Conectado a Red|1|2019-06-10|United States
+8|Computadores|Dispositivos para redes|Combos de Routers para Módems|1|2019-06-10|United States
+9|Computadores|Dispositivos para redes|Antenas de Red|1|2019-06-10|United States
+10|Computadores|Dispositivos para redes|Concentradores|1|2019-06-10|United States
+11|Computadores|Dispositivos para redes|Dispositivos para Streaming|1|2019-06-10|United States
+12|Computadores|Dispositivos para redes|Interruptores|1|2019-06-10|United States
+13|Computadores|Dispositivos para redes|Módems|1|2019-06-10|United States
+14|Computadores|Dispositivos para redes|Puntos Inalámbricos de Acceso|1|2019-06-10|United States
+15|Computadores|Dispositivos para redes|Repetidores|1|2019-06-10|United States
+16|Computadores|Dispositivos para redes|Routers|1|2019-06-10|United States
+17|Computadores|Dispositivos para redes|Servidores de Dispositivos|1|2019-06-10|United States
+18|Computadores|Dispositivos para redes|Servidores de Impresión|1|2019-06-10|United States
+15|Computadores|Dispositivos para redes|Sistemas WI-FI para todo el hogar y de malla|1|2019-06-10|United States
+15|Computadores|Dispositivos para redes|Transceptores de Red|1|2019-06-10|United States

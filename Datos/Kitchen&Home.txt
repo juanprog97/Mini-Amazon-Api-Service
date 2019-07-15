@@ -1,0 +1,16 @@
+id|Department|Category|SubCategory|active|createDate|country
+1|Kitchen&Home|Home & Kitchen|Kids' Home Store|1|2019-06-19|Cali
+2|Kitchen&Home|Home & Kitchen|Kitchen & Dining|0|2019-05-10|Bogota
+3|Kitchen&Home|Home & Kitchen|Bedding|1|2019-06-6|Medellin
+4|Kitchen&Home|Home & Kitchen|Bath|1|2019-06-10|Cali
+5|Kitchen&Home|Home & Kitchen|Furniture|1|2019-06-11|Bogota
+6|Kitchen&Home|Home & Kitchen|Home Décor|0|2019-03-10|Medellin
+7|Kitchen&Home|Home & Kitchen|Wall Art|1|2019-04-10|Cali
+8|Kitchen&Home|Home & Kitchen|Lighting & Ceiling Fans|1|2019-06-10|Bogota
+9|Kitchen&Home|Home & Kitchen|Seasonal Décor|0|2019-06-1|Cali
+10|Kitchen&Home|Home & Kitchen|Event & Party Supplies|1|2019-06-07|Medellin
+11|Kitchen&Home|Home & Kitchen|Heating, Cooling & Air Quality|1|2019-03-10|Cali
+12|Kitchen&Home|Home & Kitchen|Irons & Steamers|1|2019-02-10|Cali
+13|Kitchen&Home|Home & Kitchen|Vacuums & Floor Care|0|2019-06-14|Bogota
+14|Kitchen&Home|Home & Kitchen|Storage & Organization|1|2019-06-13|Medellin
+15|Kitchen&Home|Home & Kitchen|Cleaning Supplies|1|2019-06-9|Cali

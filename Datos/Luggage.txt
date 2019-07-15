@@ -1,0 +1,7 @@
+id|Department|Category|SubCategory|active|createDate|country
+1|Luggage|Girl's Fashion|Clothing|1|2019-06-10|United States
+2|Luggage|Girl's Fashion|Shoes|1|2019-06-10|United States
+3|Luggage|Girl's Fashion|Watches|1|2019-06-10|United States
+4|Luggage|Girl's Fashion|Jewelry|0|2019-06-10|United States
+5|Luggage|Umbrellas|StickUbrellas|1|2019-06-10|United States
+6|Luggage|Umbrellas|Jewelry|0|2019-06-10|United States

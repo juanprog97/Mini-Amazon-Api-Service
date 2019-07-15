@@ -1,0 +1,16 @@
+id|Department|Category|SubCategory|active|createDate|country
+1|ToysAndGames|ActionFigures|Accessories|1|2019-06-10|Cali
+2|ToysAndGames|ActionFigures|ActionFigures|1|2017-05-10|Cali
+3|ToysAndGames|ActionFigures|Playsets|0|2015-08-31|Palmira
+4|ToysAndGames|ArtsCrafts|ApronSmocks|1|2014-01-22|Medellin
+5|ToysAndGames|ArtsCrafts|Stickers|0|2019-06-05|Medellin
+6|ToysAndGames|BuildingToys|BuildingSets|0|2010-11-04|Cali
+7|ToysAndGames|BuildingToys|GearSets|0|2017-07-07|Palmira
+8|ToysAndGames|BuildingToys|MarbleRuns|1|2017-07-07|Palmira
+9|ToysAndGames|BuildingToys|StackingBlocks|1|2015-04-03|Cali
+10|ToysAndGames|GrownUpToys|NoveltyGag|0|2011-12-11|Bogota
+11|ToysAndGames|GrownUpToys|Puzzles|0|2011-12-05|Medellin
+12|ToysAndGames|GrownUpToys|ActionToyFigures|1|2011-11-15|Cali
+13|ToysAndGames|GrownUpToys|Games|0|2012-07-12|Bogota
+14|ToysAndGames|GrownUpToys|DieCast|1|2013-10-25|Palmira
+15|ToysAndGames|DollsAccesories|Dolls|0|2014-11-21|Cali

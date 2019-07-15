@@ -1,0 +1,29 @@
+id|Department|Category|SubCategory|active|createDate|country
+1|Digital Music|Download Store|Alternative & Indie Rock|1|2019-06-11|United States
+2|Digital Music|Download Store|Blues|1|2019-06-11|United States
+3|Digital Music|Download Store|Broadway & Vocalists|1|2019-06-11|United States
+4|Digital Music|Download Store|Children's Music|1|2019-06-11|United States
+5|Digital Music|Download Store|Christian|0|2019-06-11|United States
+6|Digital Music|Download Store|Classical|1|2019-06-11|United States
+7|Digital Music|Download Store|Classic Rock|1|2019-06-11|United States
+8|Digital Music|Download Store|Comedy & Miscellaneous|1|2019-06-11|United States
+9|Digital Music|Download Store|Country|1|2019-06-11|United States
+10|Digital Music|Download Store|Dance & Electronic|1|2019-06-11|United States
+11|Digital Music|Download Store|Folk|1|2019-06-11|United States
+12|Digital Music|Download Store|Gospel|1|2019-06-11|United States
+13|Digital Music|Download Store|Hard Rock & Metal|1|2019-06-11|United States
+14|Digital Music|Download Store|Holiday Music|0|2019-06-11|United States
+15|Digital Music|Download Store|Jazz|0|2019-06-11|United States
+16|Digital Music|Download Store|Latin Music|0|2019-06-11|United States
+17|Digital Music|Download Store|New Age|0|2019-06-11|United States
+18|Digital Music|Download Store|Opera & Vocal|1|2019-06-11|United States
+19|Digital Music|Download Store|Pop|0|2019-06-11|United States
+20|Digital Music|Download Store|R&B|1|2019-06-11|United States
+21|Digital Music|Download Store|Rap & Hip-Hop|1|2019-06-11|United States
+22|Digital Music|Download Store|Rock|0|2019-06-11|United States
+23|Digital Music|Download Store|Soundtracks|0|2019-06-11|United States
+24|Digital Music|Download Store|World Music|1|2019-06-11|United States
+25|Digital Music|Stream Music|Amazon Music Unlimited|1|2019-06-10|United States
+26|Digital Music|Stream Music|Prime Music|1|2019-06-10|United States
+27|Digital Music|Buy Music|Best Sellers|1|2019-06-10|United States
+28|Digital Music|Buy Music|New Releases|1|2019-06-10|United States

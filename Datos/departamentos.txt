@@ -1,0 +1,23 @@
+id|name|active|create_date|country
+1|Digital Music|1|2019-06-10|United States
+2|Books|1|2019-06-10|United States
+3|Baby|0|2019-06-11|Colombia
+4|Automotive|0|2019-06-12|United States
+5|Software|0|2019-06-13|Chile
+6|Deals|0|2019-06-14|United States
+7|Video Games|0|2019-06-15|Ecuador
+8|Pet Supplies|0|2019-06-16|United States
+9|Luggage|1|2019-06-17|United States
+10|Prime Video|0|2019-06-18|United States
+11|Electronics|1|2019-06-19|United States
+12|Kindle Store|0|2019-06-21|United States
+13|Music,CDs & Vinyl|1|2019-06-22|United States
+14|Kitchen&Home|1|2019-06-23|United States
+15|Movies&TV|1|2019-06-24|United States
+16|Industrial&Scientific|1|2019-06-25|United States
+17|Girls Fashion|0|2019-06-26|United States
+18|Beauty & Personal Care|0|2019-06-27|United States
+19|SportAndOutdoors|1|2019-06-28|United States
+20|ToysAndGames|1|2019-06-29|United States
+21|Coche y Moto|1|2019-06-29|United States
+22|Computadores|1|2019-06-29|Colombia

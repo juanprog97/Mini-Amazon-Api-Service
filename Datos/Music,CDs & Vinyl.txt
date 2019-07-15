@@ -1,0 +1,29 @@
+id|Department|Category|SubCategory|active|createDate|country
+1|Music,CDs & Vinyl|CD & Vinyl|Alternative Rock|1|2019-06-10|United States
+2|Music,CDs & Vinyl|CD & Vinyl|Blues|1|2019-06-10|United States
+3|Music,CDs & Vinyl|CD & Vinyl|Broadway & Vocalists|1|2019-06-10|United States
+4|Music,CDs & Vinyl|CD & Vinyl|Children's Music|1|2019-06-10|United States
+5|Music,CDs & Vinyl|CD & Vinyl|Christian|0|2019-06-10|United States
+6|Music,CDs & Vinyl|CD & Vinyl|Classic Rock|1|2019-06-10|United States
+7|Music,CDs & Vinyl|CD & Vinyl|Classical|1|2019-06-10|United States
+8|Music,CDs & Vinyl|CD & Vinyl|Comedy & Spoken Word|1|2019-06-10|United States
+9|Music,CDs & Vinyl|CD & Vinyl|Country|1|2019-06-10|United States
+10|Music,CDs & Vinyl|CD & Vinyl|Dance & Electronic|0|2019-06-10|United States
+11|Music,CDs & Vinyl|CD & Vinyl|Folk|1|2019-06-10|United States
+12|Music,CDs & Vinyl|CD & Vinyl|Gospel|1|2019-06-10|United States
+13|Music,CDs & Vinyl|CD & Vinyl|Holiday & Wedding|1|2019-06-10|United States
+14|Music,CDs & Vinyl|CD & Vinyl|Jazz|0|2019-06-10|United States
+15|Music,CDs & Vinyl|CD & Vinyl|Karaoke|1|2019-06-10|United States
+16|Music,CDs & Vinyl|CD & Vinyl|Latin Music|1|2019-06-10|United States
+17|Music,CDs & Vinyl|CD & Vinyl|Metal|1|2019-06-10|United States
+18|Music,CDs & Vinyl|CD & Vinyl|New Age|1|2019-06-10|United States
+19|Music,CDs & Vinyl|CD & Vinyl|Opera & Clasical Vocal|0|2019-06-10|United States
+20|Music,CDs & Vinyl|CD & Vinyl|Pop|0|2019-06-10|United States
+21|Music,CDs & Vinyl|CD & Vinyl|R&B|1|2019-06-10|United States
+22|Music,CDs & Vinyl|CD & Vinyl|Rap & Hip-Hop|0|2019-06-10|United States
+23|Music,CDs & Vinyl|CD & Vinyl|Reggae|0|2019-06-10|United States
+24|Music,CDs & Vinyl|CD & Vinyl|Rock|0|2019-06-10|United States
+25|Music,CDs & Vinyl|CD & Vinyl|Soundtracks|1|2019-06-10|United States
+26|Music,CDs & Vinyl|CD & Vinyl|Special Interest|1|2019-06-10|United States
+27|Music,CDs & Vinyl|CD & Vinyl|World Music|1|2019-06-10|United States
+28|Music,CDs & Vinyl|CD & Vinyl|Music Video & Concerts|1|2019-06-10|United States
