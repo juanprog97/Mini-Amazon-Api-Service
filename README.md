@@ -16,3 +16,9 @@ sudo pip install neo4jrestclient
 
 5. View in http://localhost:7474/  Database Information click in * (asterisk) <br />
 The Neo4j Browser available at http://localhost:7474/ provides a nice way to query the DB and visualise the results, both as a list of record and in a visual form.
+
+6. sudo docker build --tag=mini-amazon-users .
+
+7. sudo docker image ls
+
+8. sudo docker run -d -p 9090:9090 mini-amazon-users
