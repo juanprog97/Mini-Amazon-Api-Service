@@ -20,16 +20,16 @@ api = Api(
 
 ns = api.namespace('users', description='Users operations')
 ps = api.namespace('product', description='Product operations')
-
+cs = api.namespace('customer', description='Customer operations')
 user = api.model('User', {
     'id': fields.Integer(readOnly=True, description='The user unique identifier'),
     'username': fields.String(required=True, description='The username'),
     'status': fields.String(required=True, description='The status')
 })
 
-db = GraphDatabase("http://172.18.0.2:7474", username="neo4j", password="admin")
-q = 'match (n:User) return n.name, n.password, n.active, n.id'
-results = db.query(q, returns=(client.Node, str, client.Node))
+db = GraphDatabase("http://172.17.0.2:7474", username="neo4j", password="admin")
+#q = 'match (n:User) return n.name, n.password, n.active, n.id'
+#results = db.query(q, returns=(client.Node, str, client.Node))
 
 
 product = api.model('Product',{
@@ -43,6 +43,53 @@ product = api.model('Product',{
         'createDate': fields.String(required=False,description="Date of Creation"),
         'country': fields.String(required=True,description="Country of Creation")
 })
+
+customer = api.model('Customer',{
+        'id':fields.Integer(readOnly=True,description='The product unique identifier'),
+        'buyer':fields.String(required=True,description="The buyer of the product"),
+        'seller':fields.String(required=True,description="The seller of the product"),
+        'starts':fields.String(required=True,description="Purchase score")
+})
+
+
+class CustomertDAO(object):
+     def __init__(self):
+         self.counter = 0
+         self.query = ''
+
+     def create(self,buyer,seller,rate):
+         self.counter += 1
+         self.query = "Match(b:User) where b.name = '%s' return b" %(buyer)
+         n_buyer = db.query(self.query, returns=(client.Node))
+         self.query = "Match(s:User) where s.name = '%s' return s" %(seller)
+         n_seller = db.query(self.query, returns=(client.Node))
+         if(len(n_buyer)==0):
+             api.abort(404, "Buyer {} doesn't exist".format(buyer))
+         if(len(n_seller)==0):
+             api.abort(404, "Seller {} doesn't exist".format(seller))
+         self.query ="Match(b:User),(s:User) where b.name ='%s' and s.name = '%s' Create(b)-[:Customer {rate:'%s',id:%d}]->(s)" %(buyer,seller,rate,self.counter)
+         results = db.query(self.query)
+         self.query = "Match(b:User)-[d:Customer]->(s:User) where b.name = '%s' and s.name='%s' and d.id= %d return b,d,s" %(buyer,seller,self.counter)
+         results= db.query(self.query, returns=(client.Node,client.Relationship,client.Node,str))
+         change_new = {"buyer":results[0][0]['name'],'starts':results[0][1]['rate'],'id':results[0][1]['id'],"seller":results[0][2]['name']}
+         return change_new
+
+     def update(self,buyer,seller,rate):
+          self.query = "Match(b:User) where b.name = '%s' return b" %(buyer)
+          n_buyer = db.query(self.query, returns=(client.Node))
+          self.query = "Match(s:User) where s.name = '%s' return s" %(seller)
+          n_seller = db.query(self.query, returns=(client.Node))
+          if(len(n_buyer)==0):
+              api.abort(404, "Buyer {} doesn't exist".format(buyer))
+          if(len(n_seller)==0):
+              api.abort(404, "Seller {} doesn't exist".format(seller))
+          self.query = "Match(b:User)-[d:Customer]->(s:User) where b.name='%s' and s.name='%s' set d.rate = '%s'"%(buyer,seller,rate)
+          results = db.query(self.query)
+          self.query = "Match(b:User)-[d:Customer]->(s:User) where b.name = '%s' and s.name= '%s' return b,d,s" %(buyer,seller)
+          results= db.query(self.query, returns=(client.Node,client.Relationship,client.Node,str))
+          change_new = {"buyer":results[0][0]['name'],'starts':results[0][1]['rate'],'id':results[0][1]['id'],"seller":results[0][2]['name']}
+          return change_new
+
 
 
 class UserDAO(object):
@@ -102,6 +149,11 @@ class ProductDAO(object):
 
 DAO = UserDAO()
 DAOP =  ProductDAO()
+DAOC = CustomertDAO()
+
+
+
+
 
 @ps.route("/")
 class ProductList(Resource):
@@ -121,7 +173,7 @@ class ProductList(Resource):
         return DAOP.create(api.payload), 201
 
 
-@ps.route('/<string:nameproduct>')
+@ps.route('/<string:productname>')
 @ps.response(404, 'Product not found')
 @ps.param('productname', 'The productname identifier')
 class Product(Resource):
@@ -194,6 +246,26 @@ class User(Resource):
     def put(self, username):
         '''Update a user given its identiusernamefier'''
         return DAO.update(username, api.payload)
+
+@cs.route('/<string:buyer>/salesperson/<string:seller>/start/<string:rate>')
+@cs.response(404,'User not found')
+@cs.param('buyer','The buyer identifier')
+@cs.param('seller','The buyer identifier')
+@cs.param('rate','Rated of sale')
+class Customer(Resource):
+    '''Post to add new sale and Put to change value of rate'''
+    @cs.doc('Create a new sale')
+    @cs.expect(customer)
+    @cs.marshal_with(customer)
+    def post(self,buyer,seller,rate):
+        '''Create a new sale'''
+        return DAOC.create(buyer,seller,rate)
+    @cs.expect(customer)
+    @cs.marshal_with(customer)
+    def put(self,buyer,seller,rate):
+        '''Update a sale given its two identiusernamefier'''
+        return DAOC.update(buyer,seller,rate)
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=9090, debug=True)

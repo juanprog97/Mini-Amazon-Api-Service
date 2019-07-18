@@ -1,12 +1,17 @@
 from neo4jrestclient.client import GraphDatabase
 from neo4jrestclient import client
 
-db = GraphDatabase("http://localhost:7474", username="neo4j", password="admin")
-q = 'MATCH (u:User)-[r:likes]->(m:Beer) WHERE u.name="Marco" RETURN u, type(r), m'
+db = GraphDatabase("http://172.17.0.2:7474", username="neo4j", password="admin")
+q = "Match(b:User)-[d:Customer]->(s:User) where b.name='andrea10' and s.name='santigo2' set d.rate = '4.9'"
 # "db" as defined above
-results = db.query(q, returns=(client.Node, str, client.Node))
-for r in results:
-    print("(%s)-[%s]->(%s)" % (r[0]["name"], r[1], r[2]["name"]))
+results = db.query(q, returns=(client.Node,client.Relationship,client.Node,str))
+
+q = "Match(b:User)-[d:Customer]->(s:User) where d.id=1 return b,d,s"
+results = db.query(q, returns=(client.Node,client.Relationship,client.Node,str))
+print({"buyer":{'name':results[0][0]['name'],'id':results[0][0]['id']},"sale":{'id':results[0][1]['id'],'rate':results[0][1]['rate']},
+            "seller":{'id':results[0][2]['id'],'name':results[0][2]['name']}  })
+#print("(%s)-[id:%s]->(%s)"%(results[0]['name'],results[1],results[2]['name']))
+
 # The output:
 # (Marco)-[likes]->(Punk IPA)
 # (Marco)-[likes]->(Hoegaarden Rosee)
