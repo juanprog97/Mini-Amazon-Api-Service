@@ -21,13 +21,8 @@ api = Api(
 ns = api.namespace('users', description='Users operations')
 ps = api.namespace('product', description='Product operations')
 cs = api.namespace('customer', description='Customer operations')
-user = api.model('User', {
-    'id': fields.Integer(readOnly=True, description='The user unique identifier'),
-    'username': fields.String(required=True, description='The username'),
-    'status': fields.String(required=True, description='The status')
-})
 
-db = GraphDatabase("http://172.17.0.2:7474", username="neo4j", password="admin")
+db = GraphDatabase("http://172.18.0.2:7474", username="neo4j", password="admin")
 #q = 'match (n:User) return n.name, n.password, n.active, n.id'
 #results = db.query(q, returns=(client.Node, str, client.Node))
 
@@ -42,6 +37,13 @@ product = api.model('Product',{
         'rate':fields.Float(required=True,description="rate of Product"),
         'createDate': fields.String(required=False,description="Date of Creation"),
         'country': fields.String(required=True,description="Country of Creation")
+})
+
+user = api.model('User',{
+        'id':fields.Integer(readOnly=True,description='The user unique idenfitifier'),
+        'active':fields.Integer(required=True,description="The identifier which tells if the user is active"),
+        'name':fields.String(required=True,description="The name of the user"),
+        'password':fields.String(required=True,description="The password of the user")
 })
 
 customer = api.model('Customer',{
@@ -91,60 +93,111 @@ class CustomertDAO(object):
           return change_new
 
 
-
 class UserDAO(object):
     def __init__(self):
-        self.counter = 0
-        self.users = []
+        self.counter = 500
+        self.query = ""
 
     def get(self, username):
+        '''Returns a list of users with that username'''
+        self.query = "match (u:User) where u.name='%s' return u"%(username)
+        q = db.query(self.query, returns=(client.Node))
+        if(len(q)==0):
+            api.abort(404, "User {} doesn't exist".format(username))
+        result = {"active":q[0][0]['active'],'id':q[0][0]['id'],'name':q[0][0]['name'],"password":q[0][0]['password']}
+        return result
 
-        for user in results:
-            if user['name'] == username:
-                return user
-        api.abort(404, "User {} doesn't exist".format(username))
+    def create(self, username,password,active):
+        '''Returns a list of users with that username'''
+        self.query = "MATCH (u:User) where u.name='%s' return u"%(username)
+        q = db.query(self.query, returns=(client.Node))
+        if(len(q)!=0):
+            api.abort(404, "User {} already exist".format(username))
+            result = {"active":q[0][0]['active'],'id':q[0][0]['id'],'name':q[0][0]['name'],"password":q[0][0]['password']}
+        self.query = "CREATE (u:User {active:'%s',id:'%s',name:'%s',password:'%s'}) "%(active,self.counter,username,password)
+        self.counter += 1
+        q = db.query(self.query, returns=(client.Node))
+        result = {"active":'{}'.format(active),'name':'{}'.format(username),"password":'{}'.format(password)}
+        return result
 
-    def create(self, data):
-        new_user = data
-        new_user['id'] = self.counter = self.counter + 1
-        self.users.append(new_user)
-        return new_user
-
-    def update(self, username, data):
-        user = self.get(username)
-        user.update(data)
-        return user
+    def update(self, username,password,active):
+        '''Returns a list of users with that username'''
+        self.query = "MATCH (u:User) where u.name='%s' return u"%(username)
+        q = db.query(self.query, returns=(client.Node))
+        if(len(q)==0):
+            api.abort(404, "User {} doesn't exist".format(username))
+        results = []
+        result = {"active":q[0][0]['active'],'id':q[0][0]['id'],'name':q[0][0]['name'],"password":q[0][0]['password']}
+        results.append(result)
+        self.query = "MATCH (u:User) where u.name='%s' set u.password='%s', u.active=%s return u "%(username,password,active)
+        q = db.query(self.query, returns=(client.Node))
+        results.append({"active":q[0][0]['active'],'id':q[0][0]['id'],'name':q[0][0]['name'],"password":q[0][0]['password']})
+        return results
 
     def delete(self, username):
-        user = self.get(username)
-        self.users.remove(user)
+        '''Returns a list of users with that username'''
+        self.query = "MATCH (u:User) where u.name='%s' return u"%(username)
+        q = db.query(self.query, returns=(client.Node))
+        if(len(q)==0):
+            api.abort(404, "User {} doesn't exist".format(username))
+        result = {"active":q[0][0]['active'],'id':q[0][0]['id'],'name':q[0][0]['name'],"password":q[0][0]['password']}
+        self.query = "MATCH (u:User) where u.name='%s' DETACH DELETE u"%(username)
+        q = db.query(self.query, returns=(client.Node))
+        return result
 
 
 class ProductDAO(object):
     def __init__(self):
         self.counter = 0
-        self.products = []
+        self.query = ""
 
 
-    def get(self,product):
-        for prod in self.product:
-            if prod['nameProduct'] == product:
-                return prod
-        api.abort(404, "Product {} doesn't exist".format(product))
+    def get(self, username):
+        '''Returns a list of users with that username'''
+        self.query = "match (u:User) where u.name='%s' return u"%(username)
+        q = db.query(self.query, returns=(client.Node))
+        if(len(q)==0):
+            api.abort(404, "User {} doesn't exist".format(username))
+        result = {"active":q[0][0]['active'],'id':q[0][0]['id'],'name':q[0][0]['name'],"password":q[0][0]['password']}
+        return result
 
-    def create(self,data):
-        new_product = data
-        new_product['id'] = self.counter = self.counter + 1
-        new_product['createDate'] = datetime.date.today()
-        self.product.append(new_product)
-        return new_product
-    def update(self,prod,data):
-        product = self.get(prod)
-        product.update(data)
-        return product
-    def delete(self,prod):
-        product = self.get(prod)
-        self.products.remove(product)
+    def create(self, username,password,active):
+        '''Returns a list of users with that username'''
+        self.query = "MATCH (u:User) where u.name='%s' return u"%(username)
+        q = db.query(self.query, returns=(client.Node))
+        if(len(q)!=0):
+            api.abort(404, "User {} already exist".format(username))
+            result = {"active":q[0][0]['active'],'id':q[0][0]['id'],'name':q[0][0]['name'],"password":q[0][0]['password']}
+        self.query = "CREATE (u:User {active:'%s',id:'%s',name:'%s',password:'%s'}) "%(active,self.counter,username,password)
+        self.counter += 1
+        q = db.query(self.query, returns=(client.Node))
+        result = {"active":'{}'.format(active),'name':'{}'.format(username),"password":'{}'.format(password)}
+        return result
+
+    def update(self, username,password,active):
+        '''Returns a list of users with that username'''
+        self.query = "MATCH (u:User) where u.name='%s' return u"%(username)
+        q = db.query(self.query, returns=(client.Node))
+        if(len(q)==0):
+            api.abort(404, "User {} doesn't exist".format(username))
+        results = []
+        result = {"active":q[0][0]['active'],'id':q[0][0]['id'],'name':q[0][0]['name'],"password":q[0][0]['password']}
+        results.append(result)
+        self.query = "MATCH (u:User) where u.name='%s' set u.password='%s', u.active=%s return u "%(username,password,active)
+        q = db.query(self.query, returns=(client.Node))
+        results.append({"active":q[0][0]['active'],'id':q[0][0]['id'],'name':q[0][0]['name'],"password":q[0][0]['password']})
+        return results
+
+    def delete(self, username):
+        '''Returns a list of users with that username'''
+        self.query = "MATCH (u:User) where u.name='%s' return u"%(username)
+        q = db.query(self.query, returns=(client.Node))
+        if(len(q)==0):
+            api.abort(404, "User {} doesn't exist".format(username))
+        result = {"active":q[0][0]['active'],'id':q[0][0]['id'],'name':q[0][0]['name'],"password":q[0][0]['password']}
+        self.query = "MATCH (u:User) where u.name='%s' DETACH DELETE u"%(username)
+        q = db.query(self.query, returns=(client.Node))
+        return result
 
 
 DAO = UserDAO()
@@ -155,22 +208,28 @@ DAOC = CustomertDAO()
 
 
 
-@ps.route("/")
+@ps.route('/<string:productname>/<string:department>/<string:category>/<string:subcategory>')
+@ps.response(404, 'User already exists')
+@ps.param('productname', 'The product identifier')
+@ps.param('department', "Product's department")
+@ps.param('category', "Product's category")
+@ps.param('subcategory', "Product's subcategory")
 class ProductList(Resource):
     '''Shows a list of all products, and lets you POST to add new products'''
-
-    @ps.doc('list_products')
-    @ps.marshal_list_with(product)
-    def get(self):
-        '''List all products'''
-        return DAOP.products
 
     @ps.doc('create_product')
     @ps.expect(product)
     @ps.marshal_with(product, code=201)
     def post(self):
         '''Create a new product'''
-        return DAOP.create(api.payload), 201
+        return DAOP.create(productname,department,category,subcategory), 201
+
+    @ps.doc('update_product')
+    @ps.expect(product)
+    @ps.marshal_with(product, code=201)
+    def put(self, productname,department,categoy,subcategory):
+        '''Update a product given its identiproductnamefier'''
+        return DAOP.update(productname,department,categoy,subcategory)
 
 
 @ps.route('/<string:productname>')
@@ -192,34 +251,29 @@ class Product(Resource):
         DAOP.delete(productname)
         return '', 204
 
-    @ps.expect(product)
-    @ps.marshal_with(product)
-    def put(self, productname):
-        '''Update a product given its identiproductnamefier'''
-        return DAOP.update(productname, api.payload)
 
 
-
-
-
-
-
-@ns.route("/")
-class UsersList(Resource):
+@ns.route('/<string:username>/<string:password>/<string:active>')
+@ns.response(404, 'User not found')
+@ns.param('username', 'The username')
+@ns.param('password', 'The password')
+@ns.param('active', 'If the user is active select 1 otherwhise 0')
+class CreateUser(Resource):
     '''Shows a list of all users, and lets you POST to add new users'''
-
-    @ns.doc('list_users')
-    @ns.marshal_list_with(user)
-    def get(self):
-        '''List all users'''
-        return DAO.users
 
     @ns.doc('create_user')
     @ns.expect(user)
     @ns.marshal_with(user, code=201)
-    def post(self):
+    def post(self,username,password,active):
         '''Create a new user'''
-        return DAO.create(api.payload), 201
+        return DAO.create(username,password,active), 201
+
+    @ns.doc('update_user')
+    @ns.expect(user)
+    @ns.marshal_with(user, code=201)
+    def put(self, username,password,active):
+        '''Update a user given its identiusernamefier'''
+        return DAO.update(username,password,active)
 
 
 @ns.route('/<string:username>')
@@ -241,11 +295,7 @@ class User(Resource):
         DAO.delete(username)
         return '', 204
 
-    @ns.expect(user)
-    @ns.marshal_with(user)
-    def put(self, username):
-        '''Update a user given its identiusernamefier'''
-        return DAO.update(username, api.payload)
+    
 
 @cs.route('/<string:buyer>/salesperson/<string:seller>/start/<string:rate>')
 @cs.response(404,'User not found')
@@ -268,4 +318,4 @@ class Customer(Resource):
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=9090, debug=True)
+    app.run(host='0.0.0.0', port=9091, debug=True)

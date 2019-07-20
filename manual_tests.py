@@ -10,14 +10,14 @@ from urllib.parse import unquote # Only to remember
 ########################################################################################################################
 
 #local
-conn = http.client.HTTPConnection("localhost:9090")
+conn = http.client.HTTPConnection("localhost:9091")
 
 ########################################################################################################################
 ######################################################## USERS #########################################################
 ########################################################################################################################
 
-#conn.request("GET", "/mini-amazon/api/users", headers={'Content-type': 'application/json'})
-conn.request("GET", "/mini-amazon/api/users/mryellow", headers={'Content-type': 'application/json'})
+conn.request("GET", "/mini-amazon/api/users", headers={'Content-type': 'application/json'})
+#conn.request("GET", "/mini-amazon/api/users/lina64", headers={'Content-type': 'application/json'})
 
 #create_user_post = {
 #     "username": "mryellow",
@@ -36,7 +36,6 @@ end = datetime.datetime.now()
 data = res.read()
 
 elapsed = end - start
-
 print(data.decode("utf-8"))
 print("\"" + str(res.status) + "\"")
 print("\"" + str(res.reason) + "\"")

@@ -1,5 +1,5 @@
 from neo4jrestclient.client import GraphDatabase
-db = GraphDatabase("http://172.17.0.2:7474", username="neo4j", password="admin")
+db = GraphDatabase("http://172.18.0.2:7474", username="neo4j", password="admin")
 
 def main():
 
