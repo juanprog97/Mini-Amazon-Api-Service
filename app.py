@@ -29,14 +29,11 @@ db = GraphDatabase("http://172.18.0.2:7474", username="neo4j", password="admin")
 
 product = api.model('Product',{
         'id':fields.Integer(readOnly=True,description='The product unique identifier'),
+        'productName': fields.String(required=True,description="Name of Product"),
+        'quantity': fields.String(required=True,description="Quantity in stock"),
         'Department': fields.String(required=True,description='Department of Products'),
         'Category': fields.String(required=True,description="Category of Products"),
-        'SubCategory':fields.String(required=True,description="SubCategory of Products"),
-        'Active': fields.Integer(required=True,description="Status of Product"),
-        'nameProduct': fields.String(required=True,description="Name of Product"),
-        'rate':fields.Float(required=True,description="rate of Product"),
-        'createDate': fields.String(required=False,description="Date of Creation"),
-        'country': fields.String(required=True,description="Country of Creation")
+        'SubCategory':fields.String(required=True,description="SubCategory of Products")
 })
 
 user = api.model('User',{
@@ -152,51 +149,47 @@ class ProductDAO(object):
         self.query = ""
 
 
-    def get(self, username):
+    def get(self, id):
         '''Returns a list of users with that username'''
-        self.query = "match (u:User) where u.name='%s' return u"%(username)
+        self.query = "match (p:Product) where u.id='%s' return p"%(id)
         q = db.query(self.query, returns=(client.Node))
         if(len(q)==0):
-            api.abort(404, "User {} doesn't exist".format(username))
-        result = {"active":q[0][0]['active'],'id':q[0][0]['id'],'name':q[0][0]['name'],"password":q[0][0]['password']}
+            api.abort(404, "Product doesn't exist")
+        result = {'id':q[0][0]['id'],"name":q[0][0]['name'],'quantity':q[0][0]['quantity']}
         return result
 
-    def create(self, username,password,active):
+    def create(self, productname,quantity,department,category,subcategory):
         '''Returns a list of users with that username'''
-        self.query = "MATCH (u:User) where u.name='%s' return u"%(username)
+        self.query = "MATCH (a:Department)<-[:Category]-(b:Category)<-[:SubCategory]-(c:SubCategory)<-[:Product]-(p:Product) where a.name='%s' and b.name='%s' and c.name='%s' and p.name='%s' return p"%(department,category,subcategory,productname)
         q = db.query(self.query, returns=(client.Node))
         if(len(q)!=0):
-            api.abort(404, "User {} already exist".format(username))
-            result = {"active":q[0][0]['active'],'id':q[0][0]['id'],'name':q[0][0]['name'],"password":q[0][0]['password']}
-        self.query = "CREATE (u:User {active:'%s',id:'%s',name:'%s',password:'%s'}) "%(active,self.counter,username,password)
+            api.abort(404, "Product {} already exist".format(productname))
+        self.query = "MATCH (a:Department)<-[:Category]-(b:Category)<-[:SubCategory]-(c:SubCategory) where a.name='%s' and b.name='%s' and c.name='%s' CREATE (p:Product { id:'%s' , name:'%s' ,quantity:'%s' })-[:Product]->(c)"%(department,category,subcategory,self.counter,productname,quantity)
         self.counter += 1
-        q = db.query(self.query, returns=(client.Node))
-        result = {"active":'{}'.format(active),'name':'{}'.format(username),"password":'{}'.format(password)}
+        q = db.query(self.query)
+        result = {'id':5 ,'productname':'','quantity':'','department':'','category':'','subcategory':''}
         return result
 
-    def update(self, username,password,active):
+    def update(self, idProduct, productname,quantity):
         '''Returns a list of users with that username'''
-        self.query = "MATCH (u:User) where u.name='%s' return u"%(username)
+        self.query = "MATCH (p:Product) where p.id=%s return p"%(idProduct)
         q = db.query(self.query, returns=(client.Node))
         if(len(q)==0):
-            api.abort(404, "User {} doesn't exist".format(username))
-        results = []
-        result = {"active":q[0][0]['active'],'id':q[0][0]['id'],'name':q[0][0]['name'],"password":q[0][0]['password']}
-        results.append(result)
-        self.query = "MATCH (u:User) where u.name='%s' set u.password='%s', u.active=%s return u "%(username,password,active)
-        q = db.query(self.query, returns=(client.Node))
-        results.append({"active":q[0][0]['active'],'id':q[0][0]['id'],'name':q[0][0]['name'],"password":q[0][0]['password']})
-        return results
+            api.abort(404, "Product {} doesn't exist".format(idProduct))
+        self.query = "MATCH (p:Product) where p.id='%s' SET p.name='%s', p.quantity='%s' "%(idProduct,productname,quantity)
+        q = db.query(self.query)
+        result = {'id':0 ,'productname':'','quantity':'','department':'','category':'','subcategory':''}
+        return result
 
-    def delete(self, username):
+    def delete(self, idProduct):
         '''Returns a list of users with that username'''
-        self.query = "MATCH (u:User) where u.name='%s' return u"%(username)
+        self.query = "MATCH (p:Product) where p.id='%s' return p"%(idProduct)
         q = db.query(self.query, returns=(client.Node))
         if(len(q)==0):
-            api.abort(404, "User {} doesn't exist".format(username))
-        result = {"active":q[0][0]['active'],'id':q[0][0]['id'],'name':q[0][0]['name'],"password":q[0][0]['password']}
-        self.query = "MATCH (u:User) where u.name='%s' DETACH DELETE u"%(username)
+            api.abort(404, "Product {} doesn't exist".format(idProduct))
+        self.query = "MATCH (p:Product) where p.id='%s' DETACH DELETE p"%(idProduct)
         q = db.query(self.query, returns=(client.Node))
+        result = {'id':0 ,'productname':'','quantity':'','department':'','category':'','subcategory':''}
         return result
 
 
@@ -208,9 +201,10 @@ DAOC = CustomertDAO()
 
 
 
-@ps.route('/<string:productname>/<string:department>/<string:category>/<string:subcategory>')
+@ps.route('/<string:productname>/<string:quantity>/<string:department>/<string:category>/<string:subcategory>')
 @ps.response(404, 'User already exists')
 @ps.param('productname', 'The product identifier')
+@ps.param('quantity', 'The quantity of products')
 @ps.param('department', "Product's department")
 @ps.param('category', "Product's category")
 @ps.param('subcategory', "Product's subcategory")
@@ -220,19 +214,26 @@ class ProductList(Resource):
     @ps.doc('create_product')
     @ps.expect(product)
     @ps.marshal_with(product, code=201)
-    def post(self):
+    def post(self,productname,quantity,department,category,subcategory):
         '''Create a new product'''
-        return DAOP.create(productname,department,category,subcategory), 201
+        return DAOP.create(productname,quantity,department,category,subcategory), 201
+
+@ps.route('/<string:idProduct>/<string:productname>/<string:quantity>')
+@ps.response(404, 'User already exists')
+@ps.param('idProduct', 'The product identifier')
+@ps.param('productname', 'The product identifier')
+@ps.param('quantity', 'The quantity of products')
+class ProductList(Resource):
+    '''Shows a list of all products, and lets you POST to add new products'''
 
     @ps.doc('update_product')
     @ps.expect(product)
     @ps.marshal_with(product, code=201)
-    def put(self, productname,department,categoy,subcategory):
+    def put(self, idProduct, productname,quantity):
         '''Update a product given its identiproductnamefier'''
-        return DAOP.update(productname,department,categoy,subcategory)
+        return DAOP.update(idProduct, productname,quantity)
 
-
-@ps.route('/<string:productname>')
+@ps.route('/<string:idProduct>')
 @ps.response(404, 'Product not found')
 @ps.param('productname', 'The productname identifier')
 class Product(Resource):
@@ -240,15 +241,15 @@ class Product(Resource):
 
     @ps.doc('get_product')
     @ps.marshal_with(product)
-    def get(self, productname):
+    def get(self, idProduct):
         '''Fetch a given resource'''
-        return DAOP.get(productname)
+        return DAOP.get(idProduct)
 
     @ps.doc('delete_product')
     @ps.response(204, 'Product deleted')
-    def delete(self, productname):
+    def delete(self, idProduct):
         '''Delete a product given its productname'''
-        DAOP.delete(productname)
+        DAOP.delete(idProduct)
         return '', 204
 
 
@@ -318,4 +319,4 @@ class Customer(Resource):
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=9091, debug=True)
+    app.run(host='0.0.0.0', port=9090, debug=True)
